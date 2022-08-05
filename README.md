@@ -10,4 +10,25 @@ Two free data sets were used to generate movie database:
 Two tables were cleaned and merged, then created build script called 'database_build_script'
 Run script in SSMS to build movie database. (There should be 35 rows)
 
+<br/><br/>
+
+## IDE:  
+### Visual Studio 2022 ###
+
+<br/><br/>
+
+## FramWork
+### ASP.NET Core 3.1
+
+
+
+
+
+
+
+
+
+
+
+
 

@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using MotionPictureDataBase.DAOs;
+using MotionPictureDataBase.Models;
 using System.Data;
 using System.Data.SqlClient;
 
@@ -11,40 +13,67 @@ namespace MotionPictureDataBase.Controllers
     public class MovieController : ControllerBase
     {
         private readonly IConfiguration _configuration;
+        //string sqlDataSource;
+        MovieDAO dao;
 
+
+
+        //TO DELETE
         public MovieController(IConfiguration configuration)
         {
             _configuration = configuration;
+            dao = new MovieDAO(_configuration);
+            //sqlDataSource = _configuration.GetConnectionString("MotionPictureCon");
+            //SqlConnection myCon = new SqlConnection(sqlDataSource);
+
         }
 
         [HttpGet]
         public JsonResult Get()
         {
-            string sql = @"select title,description, release_year from movie;";
-            DataTable table = new DataTable();
-            string sqlDataSource = _configuration.GetConnectionString("MotionPictureCon");
-            SqlDataReader myReader;
-            using (SqlConnection myCon = new SqlConnection(sqlDataSource))
-            {
-                myCon.Open();
-                using (SqlCommand myCommand = new SqlCommand(sql, myCon))
-                {
-                    myReader = myCommand.ExecuteReader();
-                    table.Load(myReader);
-                    myReader.Close();
-                    myCon.Close();
-
-                }
-            }
-            return new JsonResult(table);
+            return dao.getAllMovies();
         }
 
 
+        [HttpPost]
+        public JsonResult Post([FromBody] Movie movie)
+        {
+            return dao.AddMovie(movie);
+        }
+
+        /*[HttpPost]
+        public IActionResult Post([FromBody]Models.Movie movie)
+        {
+            if (movie == null)
+            {
+                return BadRequest("InvalidData");
+            }
+            
+            using (SqlConnection myCon = new SqlConnection(sqlDataSource))
+            {
+                myCon.Open();
+                string sql = @"insert into movie(title, description,release_year) values(@title,@description,@release_year);";
+                var command = new SqlCommand(sql, myCon);
+                command.Parameters.AddWithValue("@title", movie.Title);
+                command.Parameters.AddWithValue("@description", movie.Description);
+                command.Parameters.AddWithValue("@release_year", movie.ReleaseYear);
+                using (SqlCommand myCommand = new SqlCommand(sql, myCon))
+                {
+
+                    int rows = command.ExecuteNonQuery();
+                    myCon.Close();
+                    if (rows > 0)
+                    {
+                        return Ok("Movie Added");
+                    } else
+                    {
+                        return BadRequest();
+                    }
+                }
+            }
+
+        }*/
 
 
-        /*         public IActionResult Index()
-              {
-                   return View();
-               }*/
     }
 }
