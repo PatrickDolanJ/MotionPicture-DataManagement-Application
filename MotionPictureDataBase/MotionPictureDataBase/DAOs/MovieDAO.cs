@@ -68,7 +68,31 @@ namespace MotionPictureDataBase.DAOs
         }
 
 
-        /*public IActionResult DeleteMovie(int id)
+        public bool DeleteMovie(int id)
+        {
+            string sql = @"delete from movie where id = @id;";
+            SqlDataReader myReader;
+            DataTable table = new DataTable();
+            using (SqlConnection myCon = new SqlConnection(_sqlDataSource))
+            {
+                myCon.Open();
+                var command = new SqlCommand(sql, myCon);
+                command.Parameters.AddWithValue("@id",id);
+                using (command)
+                {
+                    myReader = command.ExecuteReader();
+                    table.Load(myReader);
+                    myReader.Close();
+                    myCon.Close();
+                }
+            }
+            return true;
+
+
+
+        }
+
+        /*private Movie mapToMovie()
         {
 
         }*/

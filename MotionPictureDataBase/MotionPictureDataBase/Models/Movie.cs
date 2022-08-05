@@ -12,7 +12,8 @@ namespace MotionPictureDataBase.Models
         [StringLength(500)]
         public string Description { get; set; }
         [Required]
-        public int ReleaseYear { get; set; }
+        //need validation to not be zero or negative
+        public int ReleaseYear { get; set;}
         
     }
 }

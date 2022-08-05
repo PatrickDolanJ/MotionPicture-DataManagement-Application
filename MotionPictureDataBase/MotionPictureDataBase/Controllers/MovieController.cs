@@ -16,15 +16,10 @@ namespace MotionPictureDataBase.Controllers
         //string sqlDataSource;
         MovieDAO dao;
 
-
-
-        //TO DELETE
         public MovieController(IConfiguration configuration)
         {
             _configuration = configuration;
             dao = new MovieDAO(_configuration);
-            //sqlDataSource = _configuration.GetConnectionString("MotionPictureCon");
-            //SqlConnection myCon = new SqlConnection(sqlDataSource);
 
         }
 
@@ -40,6 +35,19 @@ namespace MotionPictureDataBase.Controllers
         {
             return dao.AddMovie(movie);
         }
+
+
+        [HttpDelete("{Id}")]
+        public bool DeleteMovie(int Id)
+        {
+            return dao.DeleteMovie(Id);
+        }
+
+
+
+
+
+
 
         /*[HttpPost]
         public IActionResult Post([FromBody]Models.Movie movie)
