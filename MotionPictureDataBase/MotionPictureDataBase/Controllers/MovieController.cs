@@ -2,86 +2,54 @@
 using Microsoft.Extensions.Configuration;
 using MotionPictureDataBase.DAOs;
 using MotionPictureDataBase.Models;
-using System.Data;
-using System.Data.SqlClient;
+using System.Collections.Generic;
+
+// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace MotionPictureDataBase.Controllers
 {
-
     [Route("api/[controller]")]
     [ApiController]
     public class MovieController : ControllerBase
     {
-        private readonly IConfiguration _configuration;
-        //string sqlDataSource;
-        MovieDAO dao;
-
-        public MovieController(IConfiguration configuration)
+        private IMovie MovieDAO { get; }
+        public MovieController(IMovie movieDAO) //dependecy injection
         {
-            _configuration = configuration;
-            dao = new MovieDAO(_configuration);
-
+            this.MovieDAO = movieDAO;
         }
-
+        // GET: api/<Movie2Controller>
         [HttpGet]
-        public JsonResult Get()
+        public IEnumerable<Movie> Get()
         {
-            return dao.getAllMovies();
+           return MovieDAO.getAllMovies();
         }
 
+        // GET api/<Movie2Controller>/5
+        [HttpGet("{id}")]
+        public Movie Get(int id)
+        {
+            return MovieDAO.getMovieById(id);
+        }
 
+        // POST api/<Movie2Controller>
         [HttpPost]
-        public JsonResult Post([FromBody] Movie movie)
+        public Movie Post([FromBody] Movie movie)
         {
-            return dao.AddMovie(movie);
+            return MovieDAO.AddMovie(movie);
         }
 
-
-        [HttpDelete("{Id}")]
-        public bool DeleteMovie(int Id)
+        // PUT api/<Movie2Controller>/5
+        [HttpPut("{id}")]
+        public void Put(int id, [FromBody] Movie movie)
         {
-            return dao.DeleteMovie(Id);
+            MovieDAO.updateMovie(movie);
         }
 
-
-
-
-
-
-
-        /*[HttpPost]
-        public IActionResult Post([FromBody]Models.Movie movie)
+        // DELETE api/<Movie2Controller>/5
+        [HttpDelete("{id}")]
+        public void Delete(int id)
         {
-            if (movie == null)
-            {
-                return BadRequest("InvalidData");
-            }
-            
-            using (SqlConnection myCon = new SqlConnection(sqlDataSource))
-            {
-                myCon.Open();
-                string sql = @"insert into movie(title, description,release_year) values(@title,@description,@release_year);";
-                var command = new SqlCommand(sql, myCon);
-                command.Parameters.AddWithValue("@title", movie.Title);
-                command.Parameters.AddWithValue("@description", movie.Description);
-                command.Parameters.AddWithValue("@release_year", movie.ReleaseYear);
-                using (SqlCommand myCommand = new SqlCommand(sql, myCon))
-                {
-
-                    int rows = command.ExecuteNonQuery();
-                    myCon.Close();
-                    if (rows > 0)
-                    {
-                        return Ok("Movie Added");
-                    } else
-                    {
-                        return BadRequest();
-                    }
-                }
-            }
-
-        }*/
-
-
+            MovieDAO.deleteMovie(id);
+        }
     }
 }

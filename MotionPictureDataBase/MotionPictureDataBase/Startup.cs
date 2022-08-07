@@ -12,6 +12,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using MotionPictureDataBase.DAOs;
 
 namespace MotionPictureDataBase
 {
@@ -38,6 +39,10 @@ namespace MotionPictureDataBase
             Newtonsoft.Json.ReferenceLoopHandling.Ignore).AddNewtonsoftJson(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
 
             services.AddControllers();
+            services.AddSingleton<IMovie>(m =>
+            {
+                return new MovieDAO(@"Server=.\SQLEXPRESS;DataBase=MotionPicture; Trusted_Connection=true"); // no security
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
