@@ -15,6 +15,18 @@ Run script in SSMS to build movie database. (There should be 35 rows)
 ## IDE:  
 ### Visual Studio 2022 ###
 
+##Dependencies##
+Microsoft.AspNetCore.Analyzers
+Microsoft.AspNetCore.Components.Analyzers
+Microsoft.AspNetCore.Mvc.Analyzers
+Mircrosoft.AspNetCore.App
+Microsoft.NETCore.App
+Microsoft.AspNetCore.JsonPatch(6.0.7)
+Mircosoft.AspNetCore.Mvc.NewtonsoftJson(3.1.16)
+System.Data.SqlClient(4.8.3)
+
+
+
 <br/><br/>
 
 ## FramWork
