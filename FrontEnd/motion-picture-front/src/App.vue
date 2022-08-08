@@ -1,7 +1,10 @@
 <template>
   <div id="app">
+    <header class ='header'>
+    <i class="fa-solid fa-clapperboard fa-2x"></i>
     <h1>Motion Picture Data Management</h1>
-    <router-view />
+    </header>
+    <router-view/>
   </div>
 </template>
 
@@ -16,24 +19,34 @@ export default {}
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  
+  
+}
+.header{
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  position: fixed-top;
+  background-color: #6273a3;
+  padding-bottom: 15px;
+  padding-top: 15px;
 }
 
 h1, h2 {
   font-weight: normal;
+  font-family:Verdana, Geneva, Tahoma, sans-serif ;
+  margin: 0px;
+  margin-left: 10px;
 }
 
-ul {
-  list-style-type: none;
-  padding: 0;
+html{
+  height: 100%;
 }
-
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-a {
-  color: #42b983;
+body{
+background: #6273a3;
+background: -webkit-linear-gradient(top, #6273a3, #242b3d);
+background: -moz-linear-gradient(top, #6273a3, #242b3d);
+background: linear-gradient(to bottom, #6273a3, #242b3d);
+margin: 0px;
 }
 </style>
