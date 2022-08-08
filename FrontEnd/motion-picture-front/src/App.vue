@@ -1,17 +1,12 @@
 <template>
   <div id="app">
     <h1>Motion Picture Data Management</h1>
+    <router-view />
   </div>
 </template>
 
 <script>
-export default {
-  name: 'app',
-  data () {
-    return {
-    }
-  }
-}
+export default {}
 </script>
 
 <style>
