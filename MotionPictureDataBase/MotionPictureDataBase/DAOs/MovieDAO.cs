@@ -10,27 +10,23 @@ namespace MotionPictureDataBase.DAOs
 {
     public class MovieDAO : IMovie //separated by commas
     {
-        //private readonly IConfiguration _configuration;
         private readonly string _sqlDataSource;
-        private readonly SqlConnection myCon;
+        private readonly SqlConnection _myCon;
 
 
         public MovieDAO(string connectionString)
         {
-            //_configuration = configuration;
-            _sqlDataSource = connectionString;  //_configuration.GetConnectionString("MotionPictureCon");
-            myCon = new SqlConnection(_sqlDataSource);
+            _sqlDataSource = connectionString;  
+            _myCon = new SqlConnection(_sqlDataSource);
         }
 
 
-        public List<Movie> getAllMovies() //List<Movie>
+        public List<Movie> getAllMovies() 
         {
             List<Movie> output = new List<Movie>();
-            string sql = @"select Top(3) id,title,description, release_year from movie order by id desc;";
-            //DataTable table = new DataTable();
-            string sqlDataSource = _sqlDataSource;//_configuration.GetConnectionString("MotionPictureCon");
+            string sql = @"select id,title,description, release_year from movie order by id desc;";
+            string sqlDataSource = _sqlDataSource;
             SqlDataReader myReader;
-
             using (SqlConnection myCon = new SqlConnection(sqlDataSource))
             {
                 myCon.Open();
@@ -41,20 +37,15 @@ namespace MotionPictureDataBase.DAOs
                     {
                         output.Add(createMovieFromReader(myReader));
                     }
-
-
-                    //table.Load(myReader);
-                    //myReader.Close();
-                    //myCon.Close();
-
+                    myCon.Close();
                 }
             }
             return output;
         }
 
-        public Movie AddMovie(Movie movieToAdd) //give back made movie object
+        public Movie AddMovie(Movie movieToAdd)
         {
-            string sql = @"insert into movie(title, description, release_year) OUTPUT INSERTED.id, values(@title,@description,@release_year) --SELECT SCOPE_IDENTITY() as newID;"; //OUTPUT INSERTED id could also work, in fact works better?
+            string sql = @"insert into movie(title, description, release_year) OUTPUT INSERTED.id values(@title,@description,@release_year);";
 
             using (SqlConnection myCon = new SqlConnection(_sqlDataSource))
 
@@ -67,10 +58,6 @@ namespace MotionPictureDataBase.DAOs
                 using (command)
                 {
                     movieToAdd.ID = Convert.ToInt32(command.ExecuteScalar());
-                     
-                    //myReader = command.ExecuteReader(); //could be execute scalar //should also be reader.Read() to translate to C# object 
-                    //table.Load(myReader);
-                    
                     myCon.Close();
                 }
             }
@@ -78,11 +65,9 @@ namespace MotionPictureDataBase.DAOs
         }
 
 
-        public void deleteMovie(int id) //ExecuteNonQuery
+        public void deleteMovie(int id) 
         {
             string sql = @"delete from movie where id = @id;";
-            SqlDataReader myReader;
-            DataTable table = new DataTable();
             using (SqlConnection myCon = new SqlConnection(_sqlDataSource))
             {
                 myCon.Open();
@@ -90,68 +75,42 @@ namespace MotionPictureDataBase.DAOs
                 command.Parameters.AddWithValue("@id", id);
                 using (command)
                 {
-                    myReader = command.ExecuteReader();
-                    table.Load(myReader);
-                    myReader.Close();
+                    command.ExecuteNonQuery();
                     myCon.Close();
                 }
             }
         }
 
 
-        public void updateMovie(Movie movie)
+        public void updateMovie(int id, Movie movieToUpdate)
         {
             string sql = @"UPDATE movie set title = @title, description = @description, release_year = @release_year where id = @id;";
-            SqlDataReader myReader;
-            DataTable table = new DataTable();
             using (SqlConnection myCon = new SqlConnection(_sqlDataSource))
             {
                 myCon.Open();
                 var command = new SqlCommand(sql, myCon);
-                command.Parameters.AddWithValue("@id", movie.ID);
-                command.Parameters.AddWithValue("@title", movie.Title);
-                command.Parameters.AddWithValue("@description", movie.Description);
-                command.Parameters.AddWithValue("@release_year", movie.ReleaseYear);
+                command.Parameters.AddWithValue("@id", id);
+                command.Parameters.AddWithValue("@title", movieToUpdate.Title);
+                command.Parameters.AddWithValue("@description", movieToUpdate.Description);
+                command.Parameters.AddWithValue("@release_year", movieToUpdate.ReleaseYear);
                 using (command)
                 {
-                    myReader = command.ExecuteReader();
-                    table.Load(myReader);
-                    myReader.Close();
+                    command.ExecuteNonQuery();
                     myCon.Close();
                 }
             }
 
         }
 
-
-        //mapiing function\\
-        /*Movie movie = new Movie();
-        cityid = Convert.ToInt32(ReadOnlyException["movie_id"])
-        etc...
-        return movie;
-         */
-
-        private Movie createMovieFromReader(SqlDataReader dataIn)
-        {
-            Movie output = new Movie();
-            output.ID = Convert.ToInt32(dataIn["id"]);
-            output.Title = Convert.ToString(dataIn["title"]);
-            output.Description = Convert.ToString(dataIn["description"]);
-            output.ReleaseYear = Convert.ToInt32(dataIn["release_year"]);
-            //etc.
-
-            return output;
-        }
 
         public Movie getMovieById(int id)
         {
             Movie output = null;
             string sql = @"select id, title, description, release_year from movie where id = @id;";
-            string sqlDataSource = _sqlDataSource;//_configuration.GetConnectionString("MotionPictureCon");
+            string sqlDataSource = _sqlDataSource;
             SqlDataReader myReader;
 
             using (SqlConnection myCon = new SqlConnection(sqlDataSource))
-
             {
                 myCon.Open();
                 var command = new SqlCommand(sql, myCon);
@@ -168,8 +127,16 @@ namespace MotionPictureDataBase.DAOs
             return output;
         }
 
+        private Movie createMovieFromReader(SqlDataReader dataIn)
+        {
+            Movie output = new Movie();
+            output.ID = Convert.ToInt32(dataIn["id"]);
+            output.Title = Convert.ToString(dataIn["title"]);
+            output.Description = Convert.ToString(dataIn["description"]);
+            output.ReleaseYear = Convert.ToInt32(dataIn["release_year"]);
 
-
+            return output;
+        }
 
     }
 }

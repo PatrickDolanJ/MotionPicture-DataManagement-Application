@@ -42,7 +42,7 @@ namespace MotionPictureDataBase.Controllers
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] Movie movie)
         {
-            MovieDAO.updateMovie(movie);
+            MovieDAO.updateMovie(id,movie);
         }
 
         // DELETE api/<Movie2Controller>/5
