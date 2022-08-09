@@ -7,20 +7,20 @@
       <th scope="col">Title</th>
       <th scope="col">Description</th>
       <th scope="col">Release Year</th>
-      <th scopre ="col">Actions</th>
-      <tr v-for="movie in movies"></tr>
-      <td>{{movie.title}}</td>
-      <td>{{movie.description}}</td>
-      <td>{{movie.release_year}}</td>
-      <td>
-        <button><i class="fa-solid fa-pen-to-square"></i></button>
-        <button><i class="fa-solid fa-copy"></i></button>
-        <button><i class="fa-solid fa-trash-can"></i></button>
-      </td>
+      <th scope ="col">Actions</th>
+          <tr scope='row' class="movie" v-for='movie in movies'>
+            <td>{{movie.Title}}</td>
+            <td>{{movie.Description}}</td>
+            <td>{{movie.ReleaseYear}}</td>
+            <td>
+              <button><i class="fa-solid fa-pen-to-square"></i></button>
+              <button><i class="fa-solid fa-copy"></i></button>
+              <button><i class="fa-solid fa-trash-can"></i></button>
+            </td>
+          </tr>
     </table>
     </div>
-    
-</template>  
+</template> 
 
 <script>
 import MovieService from '../Services/MovieService'
@@ -34,6 +34,8 @@ export default{
   },
   created(){
     MovieService.getMovies().then(resposne => {
+      console.log("got the response")
+      this.movies = resposne.data;
       this.isLoading = false;
     });
   }
@@ -43,6 +45,8 @@ export default{
 
 
 <style style="scoped">
-
+.movie-table{
+  background-color: white;
+}
 
 </style>
