@@ -27,7 +27,7 @@ export default {}
   align-items: center;
   padding-left: 20px;
   position: fixed-top;
-  background-color: #6273a3;
+  
   padding-bottom: 15px;
   padding-top: 15px;
 }
@@ -48,5 +48,9 @@ background: -webkit-linear-gradient(top, #6273a3, #242b3d);
 background: -moz-linear-gradient(top, #6273a3, #242b3d);
 background: linear-gradient(to bottom, #6273a3, #242b3d);
 margin: 0px;
+background-size: cover;
+background-repeat: no-repeat;
+background-attachment: fixed;
+
 }
 </style>
