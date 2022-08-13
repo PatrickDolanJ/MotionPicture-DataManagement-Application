@@ -65,8 +65,9 @@ namespace MotionPictureDataBase.DAOs
         }
 
 
-        public void deleteMovie(int id) 
+        public bool deleteMovie(int id) 
         {
+            int wasDeleted;
             string sql = @"delete from movie where id = @id;";
             using (SqlConnection myCon = new SqlConnection(_sqlDataSource))
             {
@@ -75,15 +76,18 @@ namespace MotionPictureDataBase.DAOs
                 command.Parameters.AddWithValue("@id", id);
                 using (command)
                 {
-                    command.ExecuteNonQuery();
+                    wasDeleted = command.ExecuteNonQuery();
                     myCon.Close();
                 }
             }
+
+            return wasDeleted == 1;
         }
 
 
-        public void updateMovie(int id, Movie movieToUpdate)
+        public bool updateMovie(int id, Movie movieToUpdate)
         {
+            int wasUpdated;
             string sql = @"UPDATE movie set title = @title, description = @description, release_year = @release_year where id = @id;";
             using (SqlConnection myCon = new SqlConnection(_sqlDataSource))
             {
@@ -95,11 +99,11 @@ namespace MotionPictureDataBase.DAOs
                 command.Parameters.AddWithValue("@release_year", movieToUpdate.ReleaseYear);
                 using (command)
                 {
-                    command.ExecuteNonQuery();
+                    wasUpdated = command.ExecuteNonQuery();
                     myCon.Close();
                 }
             }
-
+            return wasUpdated == 1;
         }
 
 

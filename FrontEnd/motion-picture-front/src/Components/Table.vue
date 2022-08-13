@@ -21,34 +21,73 @@
                 <td class="action-buttons">
                   <button class="edit-button"><i class="fa-solid fa-pen-to-square"></i></button>
                   <button class="copy-button"><i class="fa-solid fa-copy"></i></button>
-                  <button class="delete-button"><i class="fa-solid fa-trash-can"></i></button>
+                  <button class="delete-button" @click="deleteMovie(movie.ID)"><i class="fa-solid fa-trash-can"></i></button>
+                  
                 </td>
               </tr>
           </tbody>
         </table>
     </div>
+
+
+
+
+
 </template> 
 
 <script>
-import MovieService from '../Services/MovieService'
+import MovieService from '../Services/MovieService';
+// import Modal from '../Components/Modals/Modal.vue';
+// import  Component  from 'vue-class-component';
+
+// @Component({
+//   components: {
+//     Modal
+//   }
+// }),
+
+
 
 export default{
   data(){
     return {
       movies: [],
+      movieToAdd:{
+        ID: null,
+        Title: null,
+        Description: null,
+        ReleaseYear: null
+      },
       SortTitleAsc: false,
       SortDescriptionAsc: false,
-      SortYearAsc: false
+      SortYearAsc: false,
+      showDelete: false
     }
   },
   created(){
-    MovieService.getMovies().then(resposne => {
-      console.log("got the response")
-      this.movies = resposne.data;
-    });
-  },
-
+    this.getMovies();
+    },
+  
   methods:{
+    getMovies(){
+      MovieService.getMovies().then((response) => {
+      this.movies = response.data;
+    });
+    },
+
+    deleteMovie(id){
+      if(confirm("Are you sure?")){
+      MovieService.deleteMovie(id).then(response =>{
+        if(response.data==true){
+          this.getMovies();
+          this.showDelete = true;
+        } else {
+            /* the opposite */
+        }
+      }
+      )
+      }
+    },
 
     sortResults(sorter,asc) {
       asc = null;

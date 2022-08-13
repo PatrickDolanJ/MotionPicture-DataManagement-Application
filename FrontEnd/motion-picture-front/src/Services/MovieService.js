@@ -18,10 +18,10 @@ addMovie(movie){
 },
 
 updateMovie(movie){
-    return http.put('movie/${movie.id}', movie);
+    return http.put(`movie/${movie.id}`, movie);
 },
 
-deleteMovie(id){
-    return http.delete('movie/${id}');
+deleteMovie(movieId){
+    return http.delete(`movie/${movieId}`);
 }
 }

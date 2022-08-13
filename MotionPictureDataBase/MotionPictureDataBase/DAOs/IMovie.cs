@@ -10,8 +10,8 @@ namespace MotionPictureDataBase.DAOs
 
         Movie AddMovie(Movie movieToAdd);
 
-        void updateMovie(int id, Movie movietoUpdate);
+        bool updateMovie(int id, Movie movietoUpdate);
 
-        void deleteMovie(int id);
+        bool deleteMovie(int id);
     }
 }

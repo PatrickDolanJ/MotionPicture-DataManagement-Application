@@ -2,7 +2,6 @@ USE [master]
 GO
 /****** Object:  Database [MotionPicture]    Script Date: 7/31/2022 6:13:45 PM ******/
 IF NOT EXISTS(select * from sys.databases where name = 'MotionPicture')
-
 CREATE DATABASE [MotionPicture]
  CONTAINMENT = NONE
  ON  PRIMARY 
