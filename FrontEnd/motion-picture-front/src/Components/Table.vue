@@ -1,7 +1,7 @@
 <template>
     <div class ="movie-table-div">
       <div class ='add-button-header'>
-        
+      <modal v-show="visible" @close="close"></modal>
       <button class ="add-button"><i class="fa-solid fa-plus"></i> Add</button>
       </div>
         <table id="movie-table" class="table table-striped table-dark table-sm">
@@ -37,20 +37,16 @@
 
 <script>
 import MovieService from '../Services/MovieService';
-// import Modal from '../Components/Modals/Modal.vue';
-// import  Component  from 'vue-class-component';
-
-// @Component({
-//   components: {
-//     Modal
-//   }
-// }),
-
-
+import Modal from '../Components/Modals/Modal.vue';
+//import  Component  from 'vue-class-component';
 
 export default{
   data(){
     return {
+      components:{
+        Modal
+      },
+      visible: false,
       movies: [],
       movieToAdd:{
         ID: null,
@@ -75,12 +71,22 @@ export default{
     });
     },
 
+    openModal(){
+      this.visible = true;
+    },
+
+    close(){
+      this.visible = false;
+
+    },
+
     deleteMovie(id){
       if(confirm("Are you sure?")){
       MovieService.deleteMovie(id).then(response =>{
         if(response.data==true){
           this.getMovies();
           this.showDelete = true;
+          this.openModal();
         } else {
             /* the opposite */
         }
