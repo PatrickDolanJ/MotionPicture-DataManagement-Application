@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\datpo\\Desktop\\Mayvue Tech Test\\MotionPicture-DataManagement-Application\\MotionPictureDataBase\\MotionPictureDataBase\\MotionPictureDataBase.csproj": {}
+    "C:\\Users\\A Dirty Rowdy Boy\\Desktop\\Tech Test\\MotionPicture-DataManagement-Application\\MotionPictureDataBase\\MotionPictureDataBase\\MotionPictureDataBase.csproj": {}
   },
   "projects": {
-    "C:\\Users\\datpo\\Desktop\\Mayvue Tech Test\\MotionPicture-DataManagement-Application\\MotionPictureDataBase\\MotionPictureDataBase\\MotionPictureDataBase.csproj": {
+    "C:\\Users\\A Dirty Rowdy Boy\\Desktop\\Tech Test\\MotionPicture-DataManagement-Application\\MotionPictureDataBase\\MotionPictureDataBase\\MotionPictureDataBase.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\datpo\\Desktop\\Mayvue Tech Test\\MotionPicture-DataManagement-Application\\MotionPictureDataBase\\MotionPictureDataBase\\MotionPictureDataBase.csproj",
+        "projectUniqueName": "C:\\Users\\A Dirty Rowdy Boy\\Desktop\\Tech Test\\MotionPicture-DataManagement-Application\\MotionPictureDataBase\\MotionPictureDataBase\\MotionPictureDataBase.csproj",
         "projectName": "MotionPictureDataBase",
-        "projectPath": "C:\\Users\\datpo\\Desktop\\Mayvue Tech Test\\MotionPicture-DataManagement-Application\\MotionPictureDataBase\\MotionPictureDataBase\\MotionPictureDataBase.csproj",
-        "packagesPath": "C:\\Users\\datpo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\datpo\\Desktop\\Mayvue Tech Test\\MotionPicture-DataManagement-Application\\MotionPictureDataBase\\MotionPictureDataBase\\obj\\",
+        "projectPath": "C:\\Users\\A Dirty Rowdy Boy\\Desktop\\Tech Test\\MotionPicture-DataManagement-Application\\MotionPictureDataBase\\MotionPictureDataBase\\MotionPictureDataBase.csproj",
+        "packagesPath": "C:\\Users\\A Dirty Rowdy Boy\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\A Dirty Rowdy Boy\\Desktop\\Tech Test\\MotionPicture-DataManagement-Application\\MotionPictureDataBase\\MotionPictureDataBase\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\datpo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\A Dirty Rowdy Boy\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

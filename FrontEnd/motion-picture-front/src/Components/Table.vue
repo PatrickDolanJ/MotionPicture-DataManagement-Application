@@ -1,7 +1,6 @@
 <template>
     <div class ="movie-table-div">
       <div class ='add-button-header'>
-      <modal class="myModal" v-show="visible" @close="close"></modal>
       <button class ="add-button"><i class="fa-solid fa-plus"></i> Add</button>
       </div>
         <table id="movie-table" class="table table-striped table-dark table-sm">
@@ -27,6 +26,21 @@
               </tr>
           </tbody>
         </table>
+        <div>
+         <b-modal ref="deleted" title="HERE IS FARTS">
+         <p class="my-4">This is very basic modal Example!</p>
+         </b-modal>
+         </div>
+<div>
+  <b-button v-b-modal.modal-1>Click Me</b-button>
+
+  <b-modal id="modal-1" title="BootstrapVue">
+    <p class="my-4">This is very basic modal Example!</p>
+  </b-modal>
+</div>
+
+
+
     </div>
 </template> 
 
@@ -65,7 +79,7 @@ export default{
     },
 
     openModal(){
-      this.visible = true;
+      this.$refs['deleted'].show()
     },
 
     close(){
@@ -186,7 +200,4 @@ align-items: center;
   width: 150px;
 }
 
-.myModal{
-  z-index: 12000;
-}
 </style>
