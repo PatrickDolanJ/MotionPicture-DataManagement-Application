@@ -1,14 +1,16 @@
 <template>
-  <div class="modal-backdrop">
+  <div class="modal-overlay">
     <div class="modal">
       <slot name="header">
-        Hello World
+        Hello Wolrd Header
       </slot>
 
       <slot name="body">
+        Hello Mars Body
       </slot>
 
       <slot name="footer">
+        Hello Europa Footer
       </slot>
     </div>
   </div>
@@ -24,3 +26,5 @@
     },
   };
 </script>
+
+

@@ -1,8 +1,8 @@
 {
   "runtimeOptions": {
     "additionalProbingPaths": [
-      "C:\\Users\\A Dirty Rowdy Boy\\.dotnet\\store\\|arch|\\|tfm|",
-      "C:\\Users\\A Dirty Rowdy Boy\\.nuget\\packages"
+      "C:\\Users\\datpo\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\datpo\\.nuget\\packages"
     ]
   }
 }

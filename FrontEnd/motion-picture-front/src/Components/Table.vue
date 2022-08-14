@@ -1,7 +1,7 @@
 <template>
     <div class ="movie-table-div">
       <div class ='add-button-header'>
-      <modal v-show="visible" @close="close"></modal>
+      <modal class="myModal" v-show="visible" @close="close"></modal>
       <button class ="add-button"><i class="fa-solid fa-plus"></i> Add</button>
       </div>
         <table id="movie-table" class="table table-striped table-dark table-sm">
@@ -28,17 +28,11 @@
           </tbody>
         </table>
     </div>
-
-
-
-
-
 </template> 
 
 <script>
 import MovieService from '../Services/MovieService';
 import Modal from '../Components/Modals/Modal.vue';
-//import  Component  from 'vue-class-component';
 
 export default{
   data(){
@@ -57,7 +51,6 @@ export default{
       SortTitleAsc: false,
       SortDescriptionAsc: false,
       SortYearAsc: false,
-      showDelete: false
     }
   },
   created(){
@@ -85,7 +78,6 @@ export default{
       MovieService.deleteMovie(id).then(response =>{
         if(response.data==true){
           this.getMovies();
-          this.showDelete = true;
           this.openModal();
         } else {
             /* the opposite */
@@ -192,5 +184,9 @@ align-items: center;
 
 .moviie-release-year{
   width: 150px;
+}
+
+.myModal{
+  z-index: 12000;
 }
 </style>

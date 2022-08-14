@@ -4,6 +4,7 @@
     <i class="fa-solid fa-clapperboard fa-2x"></i>
     <h1>Motion Picture Data Management</h1>
     </header>
+    
     <router-view/>
   </div>
 </template>
