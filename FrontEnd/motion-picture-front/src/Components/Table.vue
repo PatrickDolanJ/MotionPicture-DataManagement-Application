@@ -18,7 +18,7 @@
                 <td class="movie-description">{{movie.Description}}</td>
                 <td class="moviie-release-year">{{movie.ReleaseYear}}</td>
                 <td class="action-buttons">
-                  <button class="edit-button"><i class="fa-solid fa-pen-to-square"></i></button>
+                  <button class="edit-button"><i class="fa-solid fa-pen-to-square" @click="openEdits()" ></i></button>
                   <button class="copy-button"><i class="fa-solid fa-copy"></i></button>
                   <button class="delete-button" @click="deleteMovie(movie.ID)"><i class="fa-solid fa-trash-can"></i></button>
                   
@@ -30,7 +30,28 @@
          
          </div>
 <div>
-  <b-modal ref="deleted" title="BootstrapVue" hide-footer hide-header><p class="my-4">{{modalTitle}}</p></b-modal>
+  <b-modal ref="simple" title="BootstrapVue" hide-footer hide-header><p class="my-4">{{modalTitle}}</p></b-modal>
+
+    <b-modal ref="edits" title="Edit Movie" size="lg" scrollable @ok.prevent="submitMovie()" >
+      <div>
+         <form class="editForm">
+          <label>Movie Name</label>
+          <div>
+            <input class="w3-input" type="text">
+          </div>
+          <label>Movie Description</label>
+          <div>
+            <textarea class="w3-input" type="text"></textarea>
+          </div>
+           <label>Release Year</label>
+          <div>
+            <input class="w3-input" type="number" style="-webkit-appearance: none; -moz-appearance: textfield;">
+          </div>
+           
+        </form>
+      </div>
+
+    </b-modal>
 </div>
 
 
@@ -66,17 +87,43 @@ export default{
     },
   
   methods:{
+
+    makeSimpleModal(message){
+      this.modalTitle = message;
+      this.openModalSimple();
+    },
+    
     getMovies(){
       MovieService.getMovies().then((response) => {
       this.movies = response.data;
     });
     },
 
-    openModalDeleted(){
-      this.$refs['deleted'].show()
+    submitMovie(){
+      if(!this.movieToAdd.Title){
+        this.makeSimpleModal("Please input the title.");
+      }
+
+
+      MovieService.addMovie(this.movieToAdd).then(function(res){
+        this.makeSimpleModal("Movie Added to DataBase!")
+         this.getMovies();
+      }).catch((error)=>{
+        if(error.response.status==415){
+          this.makeSimpleModal("Missing required information")
+        } else {
+        this.makeSimpleModal("Something went wrong.")
+        }
+      })
     },
 
+    openModalSimple(){
+      this.$refs['simple'].show()
+    },
 
+    openEdits(){
+      this.$refs['edits'].show()
+    },
 
     deleteMovie(id){
       if(confirm("Are you sure?")){
@@ -84,10 +131,10 @@ export default{
         if(response.data==true){
           this.getMovies();
           this.modalTitle = "Movie Deleted"
-          this.openModalDeleted();
+          this.openModalSimple();
         } else {
           this.modalTitle = "Failed to Delete Movie"
-          this.openModalDeleted();
+          this.openModalSimple();
         }
       })
       }
@@ -191,5 +238,6 @@ align-items: center;
 .moviie-release-year{
   width: 150px;
 }
+
 
 </style>
