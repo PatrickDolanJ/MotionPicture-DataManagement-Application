@@ -27,16 +27,10 @@
           </tbody>
         </table>
         <div>
-         <b-modal ref="deleted" title="HERE IS FARTS">
-         <p class="my-4">This is very basic modal Example!</p>
-         </b-modal>
+         
          </div>
 <div>
-  <b-button v-b-modal.modal-1>Click Me</b-button>
-
-  <b-modal id="modal-1" title="BootstrapVue">
-    <p class="my-4">This is very basic modal Example!</p>
-  </b-modal>
+  <b-modal ref="deleted" title="BootstrapVue" hide-footer hide-header><p class="my-4">{{modalTitle}}</p></b-modal>
 </div>
 
 
@@ -54,7 +48,7 @@ export default{
       components:{
         Modal
       },
-      visible: false,
+      modalTitle: "",
       movies: [],
       movieToAdd:{
         ID: null,
@@ -78,26 +72,24 @@ export default{
     });
     },
 
-    openModal(){
+    openModalDeleted(){
       this.$refs['deleted'].show()
     },
 
-    close(){
-      this.visible = false;
 
-    },
 
     deleteMovie(id){
       if(confirm("Are you sure?")){
       MovieService.deleteMovie(id).then(response =>{
         if(response.data==true){
           this.getMovies();
-          this.openModal();
+          this.modalTitle = "Movie Deleted"
+          this.openModalDeleted();
         } else {
-            /* the opposite */
+          this.modalTitle = "Failed to Delete Movie"
+          this.openModalDeleted();
         }
-      }
-      )
+      })
       }
     },
 
