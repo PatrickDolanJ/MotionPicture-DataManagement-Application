@@ -18,7 +18,7 @@
                 <td class="movie-description">{{movie.Description}}</td>
                 <td class="moviie-release-year">{{movie.ReleaseYear}}</td>
                 <td class="action-buttons">
-                  <button class="edit-button"><i class="fa-solid fa-pen-to-square" @click="openEdits()" ></i></button>
+                  <button class="edit-button"><i class="fa-solid fa-pen-to-square" @click="editMovie(movie)" ></i></button>
                   <button class="copy-button"><i class="fa-solid fa-copy"></i></button>
                   <button class="delete-button" @click="deleteMovie(movie.ID)"><i class="fa-solid fa-trash-can"></i></button>
                   
@@ -37,15 +37,15 @@
          <form class="editForm">
           <label>Movie Name</label>
           <div>
-            <input class="w3-input" type="text">
+            <input  class="w3-input" type="text" v-model="movieToAdd.Title">
           </div>
           <label>Movie Description</label>
           <div>
-            <textarea class="w3-input" type="text"></textarea>
+            <textarea class="w3-input" type="text" v-model="movieToAdd.Description"></textarea>
           </div>
            <label>Release Year</label>
           <div>
-            <input class="w3-input" type="number" style="-webkit-appearance: none; -moz-appearance: textfield;">
+            <input class="w3-input" type="number" style="-webkit-appearance: none; -moz-appearance: textfield;" v-model="movieToAdd.ReleaseYear">
           </div>
            
         </form>
@@ -92,6 +92,13 @@ export default{
       this.modalTitle = message;
       this.openModalSimple();
     },
+
+    emptyMovieToAdd(){
+      this.movieToAdd.Title = null;
+      this.movieToAdd.Title = null;
+      this.movieToAdd.Title = null;
+      this.movieToAdd.Title = null;
+    },
     
     getMovies(){
       MovieService.getMovies().then((response) => {
@@ -99,13 +106,25 @@ export default{
     });
     },
 
+    editMovie(movie){
+      this.movieToAdd.Title = movie.Title;  
+      this.movieToAdd.Description = movie.Description;
+      this.movieToAdd.ReleaseYear = movie.ReleaseYear;
+      this.movieToAdd.ID = movie.ID;
+      this.openEdits();
+    },
+
     submitMovie(){
       if(!this.movieToAdd.Title){
         this.makeSimpleModal("Please input the title.");
       }
 
+      if(this.movieToAdd.ReleaseYear.toString().length!=4){
+        this.makeSimpleModal("Please enter a valid year")
+      }
 
-      MovieService.addMovie(this.movieToAdd).then(function(res){
+      if(this.movieToAdd.ID==null){
+      MovieService.addMovie(this.movieToAdd).then(response=>{
         this.makeSimpleModal("Movie Added to DataBase!")
          this.getMovies();
       }).catch((error)=>{
@@ -115,6 +134,15 @@ export default{
         this.makeSimpleModal("Something went wrong.")
         }
       })
+      } else {
+        MovieService.updateMovie(this.movieToAdd).then(response=>{
+        this.makeSimpleModal("Movie Updated!");
+        this.getMovies()
+        }).catch((error)=>{
+          this.makeSimpleModal("Could not update movie.")
+          console.log(error.response)
+        })
+      }
     },
 
     openModalSimple(){
@@ -239,5 +267,12 @@ align-items: center;
   width: 150px;
 }
 
+.editForm div>*{
+  width: 100%;
+}
+
+textarea{
+  height: 500px;
+}
 
 </style>

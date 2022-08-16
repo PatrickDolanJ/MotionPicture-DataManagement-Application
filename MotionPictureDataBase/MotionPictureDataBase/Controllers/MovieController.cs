@@ -40,9 +40,11 @@ namespace MotionPictureDataBase.Controllers
 
         // PUT api/<Movie2Controller>/5
         [HttpPut("{id}")]
-        public bool Put(int id, [FromBody] Movie movie)
+        public IActionResult Put(int id, [FromBody] Movie movie)
         {
-             return MovieDAO.updateMovie(id,movie);
+              MovieDAO.updateMovie(id,movie);
+              return Ok();
+                
         }
 
         // DELETE api/<Movie2Controller>/5

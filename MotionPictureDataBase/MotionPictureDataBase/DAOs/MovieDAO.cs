@@ -85,7 +85,7 @@ namespace MotionPictureDataBase.DAOs
         }
 
 
-        public bool updateMovie(int id, Movie movieToUpdate)
+        public void updateMovie(int id, Movie movieToUpdate)
         {
             int wasUpdated;
             string sql = @"UPDATE movie set title = @title, description = @description, release_year = @release_year where id = @id;";
@@ -103,7 +103,6 @@ namespace MotionPictureDataBase.DAOs
                     myCon.Close();
                 }
             }
-            return wasUpdated == 1;
         }
 
 

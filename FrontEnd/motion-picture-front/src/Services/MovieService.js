@@ -14,11 +14,11 @@ getMovieById(id){
 },
 
 addMovie(movie){
-    return http.post('movie');
+    return http.post('movie', movie);
 },
 
 updateMovie(movie){
-    return http.put(`movie/${movie.id}`, movie);
+    return http.put(`movie/${movie.ID}`, movie);
 },
 
 deleteMovie(movieId){

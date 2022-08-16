@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
 namespace MotionPictureDataBase.Models
-    //change to lowercase\\
+   
    
 {
     public class Movie
@@ -13,8 +13,7 @@ namespace MotionPictureDataBase.Models
         [StringLength(500)]
         public string Description { get; set; }
         [Required]
-        [Range(0,int.MaxValue)] //chage to current_year
-        //need validation to not be zero or negative
+        [Range(0,int.MaxValue)] 
         public int ReleaseYear { get; set;} //="" would make a default
         
     }
