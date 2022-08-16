@@ -30,28 +30,31 @@
          
          </div>
 <div>
+
   <b-modal ref="simple" title="BootstrapVue" hide-footer hide-header><p class="my-4">{{modalTitle}}</p></b-modal>
 
+
     <b-modal ref="edits" title="Edit Movie" size="lg" scrollable @ok.prevent="submitMovie()" @hide="formClose()" >
-      <div>
-         <b-form-group class="editForm" label="Title" label-for = 'movieTitleInput' ref="form" :state="titleState">
+      
+         <b-form-group class="editTitle" label="Title" label-for = 'movieTitleInput' ref="form" >
             
-              <b-form-input class="w3-input" id='movieTitleInput' type="text" v-model="movieToAdd.Title" :state="validateState('Title')" aria-describedby="title-feedback"></b-form-input>
-            
+            <b-form-input  id='movieTitleInput' type="text" v-model="movieToAdd.Title" :state="validateState('Title')" aria-describedby="title-feedback"
+            ></b-form-input>
             <b-form-invalid-feedback id="title-feedback">Title is required.</b-form-invalid-feedback>
+
           </b-form-group>
 
           <label>Movie Description</label>
           <div>
-            <textarea class="w3-input" type="text" v-model="movieToAdd.Description"></textarea>
+            <textarea  type="text" v-model="movieToAdd.Description"></textarea>
           </div>
-           <label>Release Year</label>
-          <div>
-            <input class="w3-input" type="number" style="-webkit-appearance: none; -moz-appearance: textfield;" v-model="movieToAdd.ReleaseYear">
-          </div>
-           
-        
-      </div>
+
+          <b-form-group class="editTitle" label="Year" label-for = 'movieYearInput' >
+            <b-form-input  type="number" style="-webkit-appearance: none; -moz-appearance: textfield;" v-model="movieToAdd.ReleaseYear" 
+            :state="validateState('ReleaseYear')" aria-describedby="year-feedback"></b-form-input>>
+            <b-form-invalid-feedback id="year-feedback">Please enter a valid year (YYYY).</b-form-invalid-feedback>
+          </b-form-group>
+      
     </b-modal>
 </div>
 
@@ -65,6 +68,7 @@ import MovieService from '../Services/MovieService';
 
 import { validationMixin } from "vuelidate";
 import { required, minLength } from "vuelidate/lib/validators";
+
 
 export default{
   mixins: [validationMixin],
@@ -90,8 +94,12 @@ export default{
       Title: {
         required,
         minLength: minLength(1)
-      }
+      },
+      ReleaseYear: {
+      required, 
+      minLength: minLength(4)
     }
+  }
   },
   created(){
     this.getMovies();
@@ -102,9 +110,6 @@ export default{
     formClose(){
         this.emptyMovieToAdd(); 
         this.getMovies(); 
-        //this.$nextTick(() => {
-        //this.$v.form.$reset();
-      
     },
     validateState(name) {
       const { $dirty, $error } = this.$v.movieToAdd[name];
@@ -145,10 +150,12 @@ export default{
     },
 
     submitMovie(){
+        this.$v.movieToAdd.$touch();
+
        if (this.$v.movieToAdd.$invalid){
+        console.log()
         return;
        }
-
 
       if(this.movieToAdd.ID==0){
       MovieService.addMovie(this.movieToAdd).then(response=>{
@@ -173,7 +180,7 @@ export default{
           console.log(error.response)
         })
       }
-
+      
     },
 
 
@@ -305,12 +312,9 @@ align-items: center;
   width: 150px;
 }
 
-.editForm div >*{
-  width: 100%;
-}
-
 textarea{
-  height: 500px;
+  width: 100%;
+  height: 450px;
 }
 
 </style>
