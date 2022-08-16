@@ -1,7 +1,7 @@
 <template>
     <div class ="movie-table-div">
       <div class ='add-button-header'>
-      <button class ="add-button" @click="openEdits()"><i class="fa-solid fa-plus" ></i> Add</button>
+      <button class ="add-button" @click="emptyMovieToAdd();  openEdits()"><i class="fa-solid fa-plus" ></i> Add</button>
       </div>
         <table id="movie-table" class="table table-striped table-dark table-sm">
           <thead class="thead-dark">
@@ -20,7 +20,7 @@
                 <td class="action-buttons">
                   <button class="edit-button" @click="editMovie(movie)" ><i class="fa-solid fa-pen-to-square"></i></button>
                   <button class="copy-button" @click="copyMovie(movie)"><i class="fa-solid fa-copy"></i></button>
-                  <button class="delete-button" @click="deleteMovie(movie.ID)"><i class="fa-solid fa-trash-can"></i></button>
+                  <button class="delete-button" @click="deleteMovie(movie)"><i class="fa-solid fa-trash-can"></i></button>
                   
                 </td>
               </tr>
@@ -38,20 +38,24 @@
           <b-form-group class="editTitle" label="Title" label-for = 'movieTitleInput' ref="form" >
               <b-form-input  id='movieTitleInput' type="text" v-model="movieToAdd.Title" :state="validateState('Title')" aria-describedby="title-feedback"
               ></b-form-input>
-              <b-form-invalid-feedback id="title-feedback">Title is required.</b-form-invalid-feedback>
+              <b-form-invalid-feedback id="title-feedback">Title is required, 50 character limit.</b-form-invalid-feedback>
+
             </b-form-group>
-            <label>Movie Description</label>
-            <div>
-              <textarea  type="text" v-model="movieToAdd.Description"></textarea>
-            </div>
+
+            <b-form-group class="editDescription" label="Description" label-for = 'movieDescriptionInput' >
+              <b-form-textarea class="descriptionInput" type="text" v-model="movieToAdd.Description"
+              :state="validateState('ReleaseYear')" aria-describedby="description-feedback" style="height:450px;"></b-form-textarea>
+              <b-form-invalid-feedback id="description-feedback">Description must be no larger than 500 characters</b-form-invalid-feedback>
+            </b-form-group>
+
             <b-form-group class="editTitle" label="Year" label-for = 'movieYearInput' >
-              <b-form-input  type="number" style="-webkit-appearance: none; -moz-appearance: textfield;" v-model="movieToAdd.ReleaseYear" 
+              <b-form-input id="movieYearInput" type="number" style="-webkit-appearance: none; -moz-appearance: textfield;" v-model="movieToAdd.ReleaseYear" 
               :state="validateState('ReleaseYear')" aria-describedby="year-feedback"></b-form-input>
               <b-form-invalid-feedback id="year-feedback">Please enter a valid year (YYYY).</b-form-invalid-feedback>
             </b-form-group>
-            <b-modal-footer>
-              <b-button v-if="movieToAdd.ID!=0" variant='danger' @click="deleteMovie(movieToAdd.ID); closeEdits();">Delete</b-button>
-            </b-modal-footer>
+            <footer>
+              <b-button v-if="movieToAdd.ID!=0" variant='danger' @click="deleteMovie(movieToAdd); closeEdits();">Delete</b-button>
+            </footer>
       </b-modal>
     </div>
   </div>
@@ -61,7 +65,7 @@
 import MovieService from '../Services/MovieService';
 
 import { validationMixin } from "vuelidate";
-import { required, minLength } from "vuelidate/lib/validators";
+import { required, minLength, maxLength } from "vuelidate/lib/validators";
 
 
 export default{
@@ -92,7 +96,10 @@ export default{
       ReleaseYear: {
       required, 
       minLength: minLength(4)
-    }
+    },
+      Description:{
+        maxLength: maxLength(500)
+      }
   }
   },
   created(){
@@ -102,7 +109,6 @@ export default{
   methods:{
 
     formClose(){
-        this.emptyMovieToAdd(); 
         this.getMovies(); 
     },
     validateState(name) {
@@ -191,9 +197,9 @@ export default{
       this.$refs['edits'].hide()
     },
 
-    deleteMovie(id){
-      if(confirm("Are you sure?")){
-      MovieService.deleteMovie(id).then(response =>{
+    deleteMovie(movie){
+      if(confirm("Are you sure you want to delete "+movie.Title+"?")){
+      MovieService.deleteMovie(movie.ID).then(response =>{
           this.getMovies();
           this.modalTitle = "Movie Deleted"
           this.openModalSimple();
@@ -301,11 +307,6 @@ align-items: center;
 
 .moviie-release-year{
   width: 150px;
-}
-
-textarea{
-  width: 100%;
-  height: 450px;
 }
 
 </style>
