@@ -44,7 +44,7 @@
 
             <b-form-group class="editDescription" label="Description" label-for = 'movieDescriptionInput' >
               <b-form-textarea class="descriptionInput" type="text" v-model="movieToAdd.Description"
-              :state="validateState('ReleaseYear')" aria-describedby="description-feedback" style="height:450px;"></b-form-textarea>
+              :state="validateState('Description')" aria-describedby="description-feedback" style="height:450px;"></b-form-textarea>
               <b-form-invalid-feedback id="description-feedback">Description must be no larger than 500 characters</b-form-invalid-feedback>
             </b-form-group>
 
@@ -91,7 +91,8 @@ export default{
     movieToAdd: {
       Title: {
         required,
-        minLength: minLength(1)
+        minLength: minLength(1),
+        maxLength: maxLength(50)
       },
       ReleaseYear: {
       required, 
