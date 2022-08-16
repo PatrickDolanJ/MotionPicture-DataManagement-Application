@@ -19,7 +19,7 @@
                 <td class="moviie-release-year">{{movie.ReleaseYear}}</td>
                 <td class="action-buttons">
                   <button class="edit-button" @click="editMovie(movie)" ><i class="fa-solid fa-pen-to-square"></i></button>
-                  <button class="copy-button"><i class="fa-solid fa-copy"></i></button>
+                  <button class="copy-button" @click="copyMovie(movie)"><i class="fa-solid fa-copy"></i></button>
                   <button class="delete-button" @click="deleteMovie(movie.ID)"><i class="fa-solid fa-trash-can"></i></button>
                   
                 </td>
@@ -114,14 +114,22 @@ export default{
       this.openEdits();
     },
 
-    submitMovie(){
-      if(!this.movieToAdd.Title){
-        this.makeSimpleModal("Please input the title.");
-      }
+    copyMovie(movie){
+      this.movieToAdd.Title = movie.Title;  
+      this.movieToAdd.Description = movie.Description;
+      this.movieToAdd.ReleaseYear = movie.ReleaseYear;
+      this.openEdits();
+    },
 
-      if(this.movieToAdd.ReleaseYear.toString().length!=4){
-        this.makeSimpleModal("Please enter a valid year")
-      }
+
+    submitMovie(){
+      // if(!this.movieToAdd.Title){
+      //   this.makeSimpleModal("Please input the title.");
+      // }
+
+      // if(this.movieToAdd.ReleaseYear.toString().length!=4){
+      //   this.makeSimpleModal("Please enter a valid year")
+      // }
 
       if(this.movieToAdd.ID==0){
       MovieService.addMovie(this.movieToAdd).then(response=>{
@@ -165,15 +173,15 @@ export default{
     deleteMovie(id){
       if(confirm("Are you sure?")){
       MovieService.deleteMovie(id).then(response =>{
-        if(response.data==true){
           this.getMovies();
           this.modalTitle = "Movie Deleted"
           this.openModalSimple();
-        } else {
-          this.modalTitle = "Failed to Delete Movie"
-          this.openModalSimple();
-        }
-      })
+        }).catch((error)=>{
+            this.modalTitle = "Failed to Delete Movie"
+            this.openModalSimple();
+            console.log(error.response)
+        })
+      
       }
     },
 

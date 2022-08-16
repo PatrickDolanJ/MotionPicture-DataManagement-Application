@@ -65,7 +65,7 @@ namespace MotionPictureDataBase.DAOs
         }
 
 
-        public bool deleteMovie(int id) 
+        public void deleteMovie(int id) 
         {
             int wasDeleted;
             string sql = @"delete from movie where id = @id;";
@@ -80,8 +80,6 @@ namespace MotionPictureDataBase.DAOs
                     myCon.Close();
                 }
             }
-
-            return wasDeleted == 1;
         }
 
 

@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using MotionPictureDataBase.DAOs;
 using MotionPictureDataBase.Models;
+using System;
 using System.Collections.Generic;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -49,9 +50,11 @@ namespace MotionPictureDataBase.Controllers
 
         // DELETE api/<Movie2Controller>/5
         [HttpDelete("{id}")]
-        public bool Delete(int id)
+        public IActionResult Delete(int id)
         {
-            return MovieDAO.deleteMovie(id);
+            
+                MovieDAO.deleteMovie(id);
+                return NoContent();
         }
     }
 }
