@@ -1,7 +1,7 @@
 <template>
     <div class ="movie-table-div">
       <div class ='add-button-header'>
-      <button class ="add-button"><i class="fa-solid fa-plus"></i> Add</button>
+      <button class ="add-button" @click="openEdits()"><i class="fa-solid fa-plus" ></i> Add</button>
       </div>
         <table id="movie-table" class="table table-striped table-dark table-sm">
           <thead class="thead-dark">
@@ -18,7 +18,7 @@
                 <td class="movie-description">{{movie.Description}}</td>
                 <td class="moviie-release-year">{{movie.ReleaseYear}}</td>
                 <td class="action-buttons">
-                  <button class="edit-button"><i class="fa-solid fa-pen-to-square" @click="editMovie(movie)" ></i></button>
+                  <button class="edit-button" @click="editMovie(movie)" ><i class="fa-solid fa-pen-to-square"></i></button>
                   <button class="copy-button"><i class="fa-solid fa-copy"></i></button>
                   <button class="delete-button" @click="deleteMovie(movie.ID)"><i class="fa-solid fa-trash-can"></i></button>
                   
@@ -32,7 +32,7 @@
 <div>
   <b-modal ref="simple" title="BootstrapVue" hide-footer hide-header><p class="my-4">{{modalTitle}}</p></b-modal>
 
-    <b-modal ref="edits" title="Edit Movie" size="lg" scrollable @ok.prevent="submitMovie()" >
+    <b-modal ref="edits" title="Edit Movie" size="lg" scrollable @ok.prevent="submitMovie()" @hide="emptyMovieToAdd()" >
       <div>
          <form class="editForm">
           <label>Movie Name</label>
@@ -72,7 +72,7 @@ export default{
       modalTitle: "",
       movies: [],
       movieToAdd:{
-        ID: null,
+        ID: 0,
         Title: null,
         Description: null,
         ReleaseYear: null
@@ -94,10 +94,10 @@ export default{
     },
 
     emptyMovieToAdd(){
+      this.movieToAdd.ID = 0;
       this.movieToAdd.Title = null;
-      this.movieToAdd.Title = null;
-      this.movieToAdd.Title = null;
-      this.movieToAdd.Title = null;
+      this.movieToAdd.Description = null;
+      this.movieToAdd.ReleaseYear = null;
     },
     
     getMovies(){
@@ -123,13 +123,15 @@ export default{
         this.makeSimpleModal("Please enter a valid year")
       }
 
-      if(this.movieToAdd.ID==null){
+      if(this.movieToAdd.ID==0){
       MovieService.addMovie(this.movieToAdd).then(response=>{
         this.makeSimpleModal("Movie Added to DataBase!")
-         this.getMovies();
+        this.getMovies();
+        this.closeEdits();
+
       }).catch((error)=>{
         if(error.response.status==415){
-          this.makeSimpleModal("Missing required information")
+        this.makeSimpleModal("Missing required information")
         } else {
         this.makeSimpleModal("Something went wrong.")
         }
@@ -137,7 +139,8 @@ export default{
       } else {
         MovieService.updateMovie(this.movieToAdd).then(response=>{
         this.makeSimpleModal("Movie Updated!");
-        this.getMovies()
+        this.getMovies();
+        this.closeEdits();
         }).catch((error)=>{
           this.makeSimpleModal("Could not update movie.")
           console.log(error.response)
@@ -145,12 +148,18 @@ export default{
       }
     },
 
+
+
     openModalSimple(){
       this.$refs['simple'].show()
     },
 
     openEdits(){
       this.$refs['edits'].show()
+    },
+
+    closeEdits(){
+      this.$refs['edits'].hide()
     },
 
     deleteMovie(id){
