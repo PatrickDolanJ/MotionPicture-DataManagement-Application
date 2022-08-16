@@ -28,3 +28,35 @@ C:\Users\datpo\Desktop\Mayvue Tech Test\MotionPicture-DataManagement-Application
 C:\Users\datpo\Desktop\Mayvue Tech Test\MotionPicture-DataManagement-Application\MotionPictureDataBase\MotionPictureDataBase\obj\Release\netcoreapp3.1\MotionPictureDataBase.dll
 C:\Users\datpo\Desktop\Mayvue Tech Test\MotionPicture-DataManagement-Application\MotionPictureDataBase\MotionPictureDataBase\obj\Release\netcoreapp3.1\MotionPictureDataBase.pdb
 C:\Users\datpo\Desktop\Mayvue Tech Test\MotionPicture-DataManagement-Application\MotionPictureDataBase\MotionPictureDataBase\obj\Release\netcoreapp3.1\MotionPictureDataBase.genruntimeconfig.cache
+C:\Users\Student\Desktop\Mayvue Test\MotionPicture-DataManagement-Application\MotionPictureDataBase\MotionPictureDataBase\bin\Release\netcoreapp3.1\appsettings.Development.json
+C:\Users\Student\Desktop\Mayvue Test\MotionPicture-DataManagement-Application\MotionPictureDataBase\MotionPictureDataBase\bin\Release\netcoreapp3.1\appsettings.json
+C:\Users\Student\Desktop\Mayvue Test\MotionPicture-DataManagement-Application\MotionPictureDataBase\MotionPictureDataBase\bin\Release\netcoreapp3.1\MotionPictureDataBase.exe
+C:\Users\Student\Desktop\Mayvue Test\MotionPicture-DataManagement-Application\MotionPictureDataBase\MotionPictureDataBase\bin\Release\netcoreapp3.1\MotionPictureDataBase.deps.json
+C:\Users\Student\Desktop\Mayvue Test\MotionPicture-DataManagement-Application\MotionPictureDataBase\MotionPictureDataBase\bin\Release\netcoreapp3.1\MotionPictureDataBase.runtimeconfig.json
+C:\Users\Student\Desktop\Mayvue Test\MotionPicture-DataManagement-Application\MotionPictureDataBase\MotionPictureDataBase\bin\Release\netcoreapp3.1\MotionPictureDataBase.runtimeconfig.dev.json
+C:\Users\Student\Desktop\Mayvue Test\MotionPicture-DataManagement-Application\MotionPictureDataBase\MotionPictureDataBase\bin\Release\netcoreapp3.1\MotionPictureDataBase.dll
+C:\Users\Student\Desktop\Mayvue Test\MotionPicture-DataManagement-Application\MotionPictureDataBase\MotionPictureDataBase\bin\Release\netcoreapp3.1\MotionPictureDataBase.pdb
+C:\Users\Student\Desktop\Mayvue Test\MotionPicture-DataManagement-Application\MotionPictureDataBase\MotionPictureDataBase\bin\Release\netcoreapp3.1\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\Student\Desktop\Mayvue Test\MotionPicture-DataManagement-Application\MotionPictureDataBase\MotionPictureDataBase\bin\Release\netcoreapp3.1\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Users\Student\Desktop\Mayvue Test\MotionPicture-DataManagement-Application\MotionPictureDataBase\MotionPictureDataBase\bin\Release\netcoreapp3.1\Newtonsoft.Json.dll
+C:\Users\Student\Desktop\Mayvue Test\MotionPicture-DataManagement-Application\MotionPictureDataBase\MotionPictureDataBase\bin\Release\netcoreapp3.1\Newtonsoft.Json.Bson.dll
+C:\Users\Student\Desktop\Mayvue Test\MotionPicture-DataManagement-Application\MotionPictureDataBase\MotionPictureDataBase\bin\Release\netcoreapp3.1\System.Data.SqlClient.dll
+C:\Users\Student\Desktop\Mayvue Test\MotionPicture-DataManagement-Application\MotionPictureDataBase\MotionPictureDataBase\bin\Release\netcoreapp3.1\runtimes\win-arm64\native\sni.dll
+C:\Users\Student\Desktop\Mayvue Test\MotionPicture-DataManagement-Application\MotionPictureDataBase\MotionPictureDataBase\bin\Release\netcoreapp3.1\runtimes\win-x64\native\sni.dll
+C:\Users\Student\Desktop\Mayvue Test\MotionPicture-DataManagement-Application\MotionPictureDataBase\MotionPictureDataBase\bin\Release\netcoreapp3.1\runtimes\win-x86\native\sni.dll
+C:\Users\Student\Desktop\Mayvue Test\MotionPicture-DataManagement-Application\MotionPictureDataBase\MotionPictureDataBase\bin\Release\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\Student\Desktop\Mayvue Test\MotionPicture-DataManagement-Application\MotionPictureDataBase\MotionPictureDataBase\bin\Release\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\Student\Desktop\Mayvue Test\MotionPicture-DataManagement-Application\MotionPictureDataBase\MotionPictureDataBase\obj\Release\netcoreapp3.1\MotionPictureDataBase.csproj.AssemblyReference.cache
+C:\Users\Student\Desktop\Mayvue Test\MotionPicture-DataManagement-Application\MotionPictureDataBase\MotionPictureDataBase\obj\Release\netcoreapp3.1\MotionPictureDataBase.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Student\Desktop\Mayvue Test\MotionPicture-DataManagement-Application\MotionPictureDataBase\MotionPictureDataBase\obj\Release\netcoreapp3.1\MotionPictureDataBase.AssemblyInfoInputs.cache
+C:\Users\Student\Desktop\Mayvue Test\MotionPicture-DataManagement-Application\MotionPictureDataBase\MotionPictureDataBase\obj\Release\netcoreapp3.1\MotionPictureDataBase.AssemblyInfo.cs
+C:\Users\Student\Desktop\Mayvue Test\MotionPicture-DataManagement-Application\MotionPictureDataBase\MotionPictureDataBase\obj\Release\netcoreapp3.1\MotionPictureDataBase.csproj.CoreCompileInputs.cache
+C:\Users\Student\Desktop\Mayvue Test\MotionPicture-DataManagement-Application\MotionPictureDataBase\MotionPictureDataBase\obj\Release\netcoreapp3.1\MotionPictureDataBase.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Student\Desktop\Mayvue Test\MotionPicture-DataManagement-Application\MotionPictureDataBase\MotionPictureDataBase\obj\Release\netcoreapp3.1\staticwebassets\MotionPictureDataBase.StaticWebAssets.Manifest.cache
+C:\Users\Student\Desktop\Mayvue Test\MotionPicture-DataManagement-Application\MotionPictureDataBase\MotionPictureDataBase\obj\Release\netcoreapp3.1\staticwebassets\MotionPictureDataBase.StaticWebAssets.xml
+C:\Users\Student\Desktop\Mayvue Test\MotionPicture-DataManagement-Application\MotionPictureDataBase\MotionPictureDataBase\obj\Release\netcoreapp3.1\scopedcss\bundle\MotionPictureDataBase.styles.css
+C:\Users\Student\Desktop\Mayvue Test\MotionPicture-DataManagement-Application\MotionPictureDataBase\MotionPictureDataBase\obj\Release\netcoreapp3.1\MotionPictureDataBase.RazorTargetAssemblyInfo.cache
+C:\Users\Student\Desktop\Mayvue Test\MotionPicture-DataManagement-Application\MotionPictureDataBase\MotionPictureDataBase\obj\Release\netcoreapp3.1\MotionPictureDataBase.csproj.CopyComplete
+C:\Users\Student\Desktop\Mayvue Test\MotionPicture-DataManagement-Application\MotionPictureDataBase\MotionPictureDataBase\obj\Release\netcoreapp3.1\MotionPictureDataBase.dll
+C:\Users\Student\Desktop\Mayvue Test\MotionPicture-DataManagement-Application\MotionPictureDataBase\MotionPictureDataBase\obj\Release\netcoreapp3.1\MotionPictureDataBase.pdb
+C:\Users\Student\Desktop\Mayvue Test\MotionPicture-DataManagement-Application\MotionPictureDataBase\MotionPictureDataBase\obj\Release\netcoreapp3.1\MotionPictureDataBase.genruntimeconfig.cache
