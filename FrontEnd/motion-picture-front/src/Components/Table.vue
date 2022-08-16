@@ -28,39 +28,33 @@
         </table>
         <div>
          
-         </div>
-<div>
+      </div>
+   <div>
 
-  <b-modal ref="simple" title="BootstrapVue" hide-footer hide-header><p class="my-4">{{modalTitle}}</p></b-modal>
-
-
-    <b-modal ref="edits" title="Edit Movie" size="lg" scrollable @ok.prevent="submitMovie()" @hide="formClose()" >
-      
-         <b-form-group class="editTitle" label="Title" label-for = 'movieTitleInput' ref="form" >
-            
-            <b-form-input  id='movieTitleInput' type="text" v-model="movieToAdd.Title" :state="validateState('Title')" aria-describedby="title-feedback"
-            ></b-form-input>
-            <b-form-invalid-feedback id="title-feedback">Title is required.</b-form-invalid-feedback>
-
-          </b-form-group>
-
-          <label>Movie Description</label>
-          <div>
-            <textarea  type="text" v-model="movieToAdd.Description"></textarea>
-          </div>
-
-          <b-form-group class="editTitle" label="Year" label-for = 'movieYearInput' >
-            <b-form-input  type="number" style="-webkit-appearance: none; -moz-appearance: textfield;" v-model="movieToAdd.ReleaseYear" 
-            :state="validateState('ReleaseYear')" aria-describedby="year-feedback"></b-form-input>>
-            <b-form-invalid-feedback id="year-feedback">Please enter a valid year (YYYY).</b-form-invalid-feedback>
-          </b-form-group>
-      
-    </b-modal>
-</div>
+      <b-modal ref="simple" hide-footer hide-header><p>{{modalTitle}}</p></b-modal>
 
 
-
+      <b-modal ref="edits" title="Edit Movie" size="lg" scrollable @ok.prevent="submitMovie()" @hide="formClose()" >
+          <b-form-group class="editTitle" label="Title" label-for = 'movieTitleInput' ref="form" >
+              <b-form-input  id='movieTitleInput' type="text" v-model="movieToAdd.Title" :state="validateState('Title')" aria-describedby="title-feedback"
+              ></b-form-input>
+              <b-form-invalid-feedback id="title-feedback">Title is required.</b-form-invalid-feedback>
+            </b-form-group>
+            <label>Movie Description</label>
+            <div>
+              <textarea  type="text" v-model="movieToAdd.Description"></textarea>
+            </div>
+            <b-form-group class="editTitle" label="Year" label-for = 'movieYearInput' >
+              <b-form-input  type="number" style="-webkit-appearance: none; -moz-appearance: textfield;" v-model="movieToAdd.ReleaseYear" 
+              :state="validateState('ReleaseYear')" aria-describedby="year-feedback"></b-form-input>
+              <b-form-invalid-feedback id="year-feedback">Please enter a valid year (YYYY).</b-form-invalid-feedback>
+            </b-form-group>
+            <b-modal-footer>
+              <b-button v-if="movieToAdd.ID!=0" variant='danger' @click="deleteMovie(movieToAdd.ID); closeEdits();">Delete</b-button>
+            </b-modal-footer>
+      </b-modal>
     </div>
+  </div>
 </template> 
 
 <script>
@@ -184,7 +178,6 @@ export default{
     },
 
 
-
     openModalSimple(){
       this.$refs['simple'].show()
     },
@@ -239,8 +232,6 @@ export default{
 
     }
   }
-
-
 </script>
 
 
