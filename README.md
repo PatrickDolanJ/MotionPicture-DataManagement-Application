@@ -48,11 +48,12 @@ In a new termial run "npm run dev"
 It should open webpage in default browser with list of movies as home page on port:8080
 
 ##Dependencies###
-  "axios": "^0.27.2",
-  "bootstrap": "^4.6.2",
-  "bootstrap-vue": "^2.22.0",
-  "vue": "^2.5.11",
-  "vue-router": "^3.5.4"
+  axios: ^0.27.2,
+  bootstrap: ^4.6.2,
+  bootstrap-vue: ^2.22.0,
+  vue: ^2.5.11,
+  vue-router: ^3.5.4,
+  vuelidate: ^0.7.7
 
 
 

@@ -14,7 +14,7 @@ getMovieById(id){
 },
 
 addMovie(movie){
-    return http.post('movie', movie);
+    return http.post('movie',movie);
 },
 
 updateMovie(movie){

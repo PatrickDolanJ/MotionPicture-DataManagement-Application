@@ -32,13 +32,15 @@
 <div>
   <b-modal ref="simple" title="BootstrapVue" hide-footer hide-header><p class="my-4">{{modalTitle}}</p></b-modal>
 
-    <b-modal ref="edits" title="Edit Movie" size="lg" scrollable @ok.prevent="submitMovie()" @hide="emptyMovieToAdd()" >
+    <b-modal ref="edits" title="Edit Movie" size="lg" scrollable @ok.prevent="submitMovie()" @hide="formClose()" >
       <div>
-         <form class="editForm">
-          <label>Movie Name</label>
-          <div>
-            <input  class="w3-input" type="text" v-model="movieToAdd.Title">
-          </div>
+         <b-form-group class="editForm" label="Title" label-for = 'movieTitleInput' ref="form" :state="titleState">
+            
+              <b-form-input class="w3-input" id='movieTitleInput' type="text" v-model="movieToAdd.Title" :state="validateState('Title')" aria-describedby="title-feedback"></b-form-input>
+            
+            <b-form-invalid-feedback id="title-feedback">Title is required.</b-form-invalid-feedback>
+          </b-form-group>
+
           <label>Movie Description</label>
           <div>
             <textarea class="w3-input" type="text" v-model="movieToAdd.Description"></textarea>
@@ -48,9 +50,8 @@
             <input class="w3-input" type="number" style="-webkit-appearance: none; -moz-appearance: textfield;" v-model="movieToAdd.ReleaseYear">
           </div>
            
-        </form>
+        
       </div>
-
     </b-modal>
 </div>
 
@@ -61,14 +62,16 @@
 
 <script>
 import MovieService from '../Services/MovieService';
-import Modal from '../Components/Modals/Modal.vue';
+
+import { validationMixin } from "vuelidate";
+import { required, minLength } from "vuelidate/lib/validators";
 
 export default{
+  mixins: [validationMixin],
   data(){
     return {
-      components:{
-        Modal
-      },
+     
+      titleState: null,
       modalTitle: "",
       movies: [],
       movieToAdd:{
@@ -82,11 +85,31 @@ export default{
       SortYearAsc: false,
     }
   },
+  validations: {
+    movieToAdd: {
+      Title: {
+        required,
+        minLength: minLength(1)
+      }
+    }
+  },
   created(){
     this.getMovies();
     },
   
   methods:{
+
+    formClose(){
+        this.emptyMovieToAdd(); 
+        this.getMovies(); 
+        //this.$nextTick(() => {
+        //this.$v.form.$reset();
+      
+    },
+    validateState(name) {
+      const { $dirty, $error } = this.$v.movieToAdd[name];
+      return $dirty ? !$error : null;
+    },
 
     makeSimpleModal(message){
       this.modalTitle = message;
@@ -121,20 +144,16 @@ export default{
       this.openEdits();
     },
 
-
     submitMovie(){
-      // if(!this.movieToAdd.Title){
-      //   this.makeSimpleModal("Please input the title.");
-      // }
+       if (this.$v.movieToAdd.$invalid){
+        return;
+       }
 
-      // if(this.movieToAdd.ReleaseYear.toString().length!=4){
-      //   this.makeSimpleModal("Please enter a valid year")
-      // }
 
       if(this.movieToAdd.ID==0){
       MovieService.addMovie(this.movieToAdd).then(response=>{
         this.makeSimpleModal("Movie Added to DataBase!")
-        this.getMovies();
+        //this.getMovies();
         this.closeEdits();
 
       }).catch((error)=>{
@@ -147,13 +166,14 @@ export default{
       } else {
         MovieService.updateMovie(this.movieToAdd).then(response=>{
         this.makeSimpleModal("Movie Updated!");
-        this.getMovies();
+        //this.getMovies();
         this.closeEdits();
         }).catch((error)=>{
           this.makeSimpleModal("Could not update movie.")
           console.log(error.response)
         })
       }
+
     },
 
 
@@ -163,6 +183,7 @@ export default{
     },
 
     openEdits(){
+      this.$v.$reset();
       this.$refs['edits'].show()
     },
 
@@ -284,7 +305,7 @@ align-items: center;
   width: 150px;
 }
 
-.editForm div>*{
+.editForm div >*{
   width: 100%;
 }
 
